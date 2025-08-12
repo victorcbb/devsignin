@@ -1,99 +1,378 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🚀 DevSignIn - API de Autenticação com NestJS
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+> **Projeto desenvolvido para fins didáticos** - Aplicação de autenticação completa utilizando NestJS, MongoDB e JWT
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## 📚 Sobre o Curso
 
-## Description
+**Nome do Curso:** NestJS do Zero com TypeORM, Mongoose, Prisma e Swagger  
+**Professor:** Jorge Aluizio Alves Souza  
+**Plataforma:** Udemy
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+---
 
-## Project setup
+## 🎯 Objetivos de Aprendizado
 
-```bash
-$ pnpm install
+Este projeto foi desenvolvido com o objetivo de:
+
+- **Conhecer os principais recursos do framework NestJS** para criação de aplicativos com o Node.js
+- **Integrar o Mongoose ao NestJS** aplicado com o banco de dados MongoDB
+- **Criar API RESTful com autenticação via Token JWT** com MongoDB e Mongoose
+
+---
+
+## 🏗️ Arquitetura da Aplicação
+
+### Tecnologias Utilizadas
+
+- **Backend:** NestJS (Framework Node.js)
+- **Banco de Dados:** MongoDB
+- **ORM:** Mongoose
+- **Autenticação:** JWT (JSON Web Tokens)
+- **Validação:** Class-validator e Class-transformer
+- **Criptografia:** bcrypt
+- **Linguagem:** TypeScript
+
+### Estrutura do Projeto
+
+```
+src/
+├── auth/                    # Módulo de autenticação
+│   ├── auth.module.ts      # Configuração do módulo
+│   ├── auth.service.ts     # Serviços de autenticação
+│   ├── models/             # Modelos JWT
+│   └── strategies/         # Estratégias Passport
+├── users/                  # Módulo de usuários
+│   ├── dto/               # Data Transfer Objects
+│   ├── models/            # Modelos de usuário
+│   ├── schemas/           # Schemas Mongoose
+│   ├── users.controller.ts # Controlador REST
+│   ├── users.service.ts   # Lógica de negócio
+│   └── users.module.ts    # Configuração do módulo
+├── app.module.ts          # Módulo principal
+├── main.ts               # Ponto de entrada
+└── ...
 ```
 
-## Compile and run the project
+---
+
+## 🚀 Como Executar Localmente
+
+### Pré-requisitos
+
+- Node.js (versão 18 ou superior)
+- MongoDB instalado e rodando
+- pnpm (ou npm/yarn)
+
+### Passo a Passo
+
+#### 1. Clone o repositório
 
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+git clone <url-do-repositorio>
+cd devsignin
 ```
 
-## Run tests
+#### 2. Instale as dependências
 
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+pnpm install
+# ou
+npm install
+# ou
+yarn install
 ```
 
-## Deployment
+#### 3. Configure as variáveis de ambiente
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
+Crie um arquivo `.env` na raiz do projeto:
 
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+```env
+PORT=3000
+MONGODB_URI=mongodb://localhost:27017/devsignin
+JWT_SECRET=sua_chave_secreta_aqui
+```
+
+#### 4. Inicie o MongoDB
 
 ```bash
-$ pnpm install -g mau
-$ mau deploy
+docker run -d -p 27017:27017 --name mongodb mongo:latest
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+#### 5. Execute a aplicação
 
-## Resources
+**Modo desenvolvimento (com hot-reload):**
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+pnpm run start:dev
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+**Modo produção:**
 
-## Support
+```bash
+pnpm run build
+pnpm run start:prod
+```
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+#### 6. Acesse a aplicação
 
-## Stay in touch
+A API estará disponível em: `http://localhost:3000`
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+---
 
-## License
+## 📡 Endpoints da API
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+| Método | Endpoint        | Descrição                | Autenticação |
+| ------ | --------------- | ------------------------ | ------------ |
+| `POST` | `/users/signup` | Cadastrar novo usuário   | ❌           |
+| `POST` | `/users/signin` | Fazer login              | ❌           |
+| `GET`  | `/users`        | Listar todos os usuários | ✅ JWT       |
+
+### Detalhes dos Endpoints
+
+#### POST `/users/signup`
+
+Cadastra um novo usuário no sistema.
+
+**Body:**
+
+```json
+{
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "password": "123456"
+}
+```
+
+**Resposta (201):**
+
+```json
+{
+  "id": "uuid-gerado",
+  "name": "João Silva",
+  "email": "joao@email.com"
+}
+```
+
+#### POST `/users/signin`
+
+Autentica um usuário e retorna um token JWT.
+
+**Body:**
+
+```json
+{
+  "email": "joao@email.com",
+  "password": "123456"
+}
+```
+
+**Resposta (200):**
+
+```json
+{
+  "name": "João Silva",
+  "email": "joao@email.com",
+  "jwtToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+}
+```
+
+#### GET `/users`
+
+Lista todos os usuários cadastrados (requer autenticação).
+
+**Headers:**
+
+```
+Authorization: Bearer <jwt-token>
+```
+
+**Resposta (200):**
+
+```json
+[
+  {
+    "id": "uuid-1",
+    "name": "João Silva",
+    "email": "joao@email.com"
+  },
+  {
+    "id": "uuid-2",
+    "name": "Maria Santos",
+    "email": "maria@email.com"
+  }
+]
+```
+
+---
+
+## 🔐 Funcionalidades de Segurança
+
+### Criptografia de Senhas
+
+- Senhas são criptografadas usando bcrypt com salt de 10 rounds
+- Middleware automático do Mongoose para hash de senhas
+
+### Autenticação JWT
+
+- Tokens JWT para autenticação de usuários
+- Estratégia Passport JWT implementada
+- Guardas de rota para proteção de endpoints
+
+### Validação de Dados
+
+- Validação automática de DTOs usando class-validator
+- Sanitização de entrada com class-transformer
+- Validação de email e comprimento mínimo de senha
+
+---
+
+## 🧪 Testes
+
+### Executar testes unitários
+
+```bash
+pnpm run test
+```
+
+### Executar testes em modo watch
+
+```bash
+pnpm run test:watch
+```
+
+### Executar testes com cobertura
+
+```bash
+pnpm run test:cov
+```
+
+### Executar testes end-to-end
+
+```bash
+pnpm run test:e2e
+```
+
+---
+
+## 🛠️ Scripts Disponíveis
+
+| Comando                | Descrição                      |
+| ---------------------- | ------------------------------ |
+| `pnpm run build`       | Compila o projeto              |
+| `pnpm run start`       | Inicia a aplicação             |
+| `pnpm run start:dev`   | Inicia em modo desenvolvimento |
+| `pnpm run start:debug` | Inicia em modo debug           |
+| `pnpm run start:prod`  | Inicia em modo produção        |
+| `pnpm run test`        | Executa testes unitários       |
+| `pnpm run test:e2e`    | Executa testes end-to-end      |
+| `pnpm run lint`        | Executa linting do código      |
+| `pnpm run format`      | Formata o código com Prettier  |
+
+---
+
+## 📦 Dependências Principais
+
+### Dependências de Produção
+
+- `@nestjs/common` - Funcionalidades core do NestJS
+- `@nestjs/mongoose` - Integração com Mongoose
+- `@nestjs/jwt` - Suporte a JWT
+- `@nestjs/passport` - Estratégias de autenticação
+- `mongoose` - ODM para MongoDB
+- `bcrypt` - Criptografia de senhas
+- `class-validator` - Validação de dados
+- `passport-jwt` - Estratégia JWT para Passport
+
+### Dependências de Desenvolvimento
+
+- `@nestjs/cli` - CLI do NestJS
+- `typescript` - Compilador TypeScript
+- `jest` - Framework de testes
+- `eslint` - Linting de código
+- `prettier` - Formatação de código
+
+---
+
+## 🔧 Configuração do Banco de Dados
+
+### MongoDB
+
+- **Porta padrão:** 27017
+- **Database:** devsignin
+- **Coleção:** users
+
+### Schema do Usuário
+
+```typescript
+{
+  name: String,      // Nome do usuário (obrigatório)
+  email: String,     // Email único (obrigatório)
+  password: String   // Senha criptografada (obrigatório)
+}
+```
+
+---
+
+## 🚨 Tratamento de Erros
+
+A aplicação inclui tratamento robusto de erros:
+
+- **Validação de entrada** com mensagens claras
+- **Tratamento de erros de banco** (duplicação de email, etc.)
+- **Respostas HTTP apropriadas** para cada tipo de erro
+- **Logs estruturados** para debugging
+
+---
+
+## 📈 Próximos Passos
+
+Para expandir esta aplicação, considere:
+
+- [ ] Implementar refresh tokens
+- [ ] Adicionar roles e permissões
+- [ ] Implementar rate limiting
+- [ ] Adicionar logs estruturados
+- [ ] Implementar cache com Redis
+- [ ] Adicionar documentação Swagger
+- [ ] Implementar testes de integração
+- [ ] Adicionar CI/CD pipeline
+
+---
+
+## 🤝 Contribuição
+
+Este é um projeto educacional. Para contribuir:
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
+
+---
+
+## 📄 Licença
+
+Este projeto é para fins educacionais e não possui licença específica.
+
+---
+
+## 👨‍🏫 Créditos
+
+**Curso:** NestJS do Zero com TypeORM, Mongoose, Prisma e Swagger  
+**Professor:** Jorge Aluizio Alves Souza  
+**Plataforma:** Udemy
+
+---
+
+## 📞 Suporte
+
+Para dúvidas sobre o projeto ou problemas técnicos, consulte:
+
+- Documentação oficial do NestJS: https://nestjs.com/
+- Documentação do Mongoose: https://mongoosejs.com/
+- Documentação do MongoDB: https://docs.mongodb.com/
+
+---
+
+**Desenvolvido com ❤️ para fins educacionais**
